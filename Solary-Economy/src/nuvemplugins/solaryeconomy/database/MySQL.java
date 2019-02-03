@@ -8,9 +8,11 @@ import java.sql.Statement;
 
 import org.bukkit.plugin.Plugin;
 
-public class MySQL implements Database {
+public class MySQL implements Database
+{
 
-	public MySQL(Plugin plugin) {
+	public MySQL(Plugin plugin)
+	{
 	}
 
 	private String hostname;
@@ -23,7 +25,8 @@ public class MySQL implements Database {
 	private Statement statement;
 
 	@Override
-	public boolean open() {
+	public boolean open()
+	{
 		try {
 
 			Class.forName("com.mysql.jdbc.Driver");
@@ -31,24 +34,27 @@ public class MySQL implements Database {
 				this.connection = DriverManager.getConnection("jdbc:mysql://" + this.hostname + "/" + this.database,
 						this.username, this.password);
 			}
-			if (this.statement == null && this.connection != null) {
+			if ((this.statement == null) && (this.connection != null)) {
 				this.statement = this.connection.createStatement();
 			}
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		}
-		return connection();
+		return this.connection();
 	}
 
 	@Override
-	public boolean close() {
-		if (connection()) {
+	public boolean close()
+	{
+		if (this.connection()) {
 			try {
-				if (this.statement != null)
+				if (this.statement != null) {
 					this.statement.close();
-				
-				if (this.connection != null)
+				}
+
+				if (this.connection != null) {
 					this.connection.close();
+				}
 
 				this.statement = null;
 				this.connection = null;
@@ -57,16 +63,18 @@ public class MySQL implements Database {
 			}
 		}
 
-		return connection();
+		return this.connection();
 	}
 
 	@Override
-	public boolean connection() {
+	public boolean connection()
+	{
 		return this.connection != null;
 	}
 
 	@Override
-	public ResultSet query(String query) {
+	public ResultSet query(String query)
+	{
 		try {
 			return this.statement.executeQuery(query);
 		} catch (Exception e) {
@@ -76,62 +84,75 @@ public class MySQL implements Database {
 	}
 
 	@Override
-	public Connection getConnection() {
+	public Connection getConnection()
+	{
 		return this.connection;
 	}
 
 	@Override
-	public String getHostname() {
+	public String getHostname()
+	{
 		return this.hostname;
 	}
 
 	@Override
-	public String getDatabase() {
+	public String getDatabase()
+	{
 		return this.database;
 	}
 
 	@Override
-	public String getUsername() {
+	public String getUsername()
+	{
 		return this.username;
 	}
 
 	@Override
-	public String getPassword() {
+	public String getPassword()
+	{
 		return this.password;
 	}
 
 	@Override
-	public String getType() {
+	public String getType()
+	{
 		return "MySQL";
 	}
 
 	@Override
-	public int getPort() {
+	public int getPort()
+	{
 		return this.port;
 	}
 
-	public void setHostname(String hostname) {
+	public void setHostname(String hostname)
+	{
 		this.hostname = hostname;
 	}
 
-	public void setDatabase(String database) {
+	public void setDatabase(String database)
+	{
 		this.database = database;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(String password)
+	{
 		this.password = password;
 	}
 
-	public void setUsername(String username) {
+	public void setUsername(String username)
+	{
 		this.username = username;
 	}
 
-	public void setPort(int port) {
+	public void setPort(int port)
+	{
 		this.port = port;
 	}
 
 	@Override
-	public boolean execute(String string) {
+	public boolean execute(String string)
+	{
 		try {
 			this.statement.execute(string);
 		} catch (SQLException e) {
@@ -141,7 +162,8 @@ public class MySQL implements Database {
 	}
 
 	@Override
-	public Statement getStatement() {
+	public Statement getStatement()
+	{
 		return this.statement;
 	}
 }

@@ -6,15 +6,19 @@ import org.bukkit.command.CommandSender;
 
 import nuvemplugins.solaryeconomy.abstracts.SubCommand;
 import nuvemplugins.solaryeconomy.app.SolaryEconomy;
+import nuvemplugins.solaryeconomy.plugin.Economia;
 
-public class SubCmdCriar extends SubCommand {
+public class SubCmdCriar extends SubCommand
+{
 
-	public SubCmdCriar(String command) {
-		super("criar", "§cUse: /" + command + " criar [nome] [valor]", "solaryeconomy.commands.criar", "create", "new");
+	public SubCmdCriar(String command)
+	{
+		super("criar", "Â§cUse: /" + command + " criar [nome] [valor]", "solaryeconomy.commands.criar", "create", "new");
 	}
 
 	@Override
-	public void execute(CommandSender sender, String[] args) {
+	public void execute(CommandSender sender, String[] args)
+	{
 		if (args.length >= 3) {
 			String nome = args[1];
 
@@ -25,15 +29,14 @@ public class SubCmdCriar extends SubCommand {
 				return;
 			}
 
-			if (SolaryEconomy.economia.createAccount(nome, valor)) {
+			if (Economia.createAccount(nome, valor)) {
 				sender.sendMessage(SolaryEconomy.mensagens.get("ACCOUNT_CREATE").replace("{nome}", nome));
-
 			} else {
 				sender.sendMessage(SolaryEconomy.mensagens.get("ACCOUNT_EXISTS").replace("{nome}", nome));
 			}
 
 		} else {
-			sender.sendMessage(getUsage());
+			sender.sendMessage(this.getUsage());
 		}
 
 	}

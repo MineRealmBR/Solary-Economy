@@ -4,16 +4,20 @@ import org.bukkit.command.CommandSender;
 
 import nuvemplugins.solaryeconomy.abstracts.SubCommand;
 import nuvemplugins.solaryeconomy.app.SolaryEconomy;
+import nuvemplugins.solaryeconomy.plugin.Economia;
 
-public class SubCmdToggle extends SubCommand {
+public class SubCmdToggle extends SubCommand
+{
 
-	public SubCmdToggle(String command) {
-		super("toggle", "§cUse: /" + command + " toggle", "solaryeconomy.commands.toggle");
+	public SubCmdToggle(String command)
+	{
+		super("toggle", "Â§cUse: /" + command + " toggle", "solaryeconomy.commands.toggle");
 	}
 
 	@Override
-	public void execute(CommandSender sender, String[] args) {
-		String toggle = SolaryEconomy.economia.toggle(sender.getName()) ? "OFF" : "ON";
+	public void execute(CommandSender sender, String[] args)
+	{
+		String toggle = Economia.toggle(sender.getName()) ? "OFF" : "ON";
 		sender.sendMessage(SolaryEconomy.mensagens.get("MONEY_TOGGLE").replace("{toggle}", toggle));
 
 	}

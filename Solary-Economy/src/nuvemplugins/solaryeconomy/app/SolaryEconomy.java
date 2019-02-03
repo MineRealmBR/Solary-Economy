@@ -7,9 +7,12 @@ import java.util.Locale;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -18,13 +21,16 @@ import nuvemplugins.solaryeconomy.database.MySQL;
 import nuvemplugins.solaryeconomy.database.SQLite;
 import nuvemplugins.solaryeconomy.manager.Mensagens;
 import nuvemplugins.solaryeconomy.plugin.Economia;
-import nuvemplugins.solaryeconomy.plugin.objetos.RefreshMoneyTop;
+import nuvemplugins.solaryeconomy.plugin.objetos.Account;
+import nuvemplugins.solaryeconomy.plugin.objetos.MoneyRunnables;
 import nuvemplugins.solaryeconomy.plugin.vault.VaultEconomy;
 import nuvemplugins.solaryeconomy.util.Config;
 
-public class SolaryEconomy implements Listener {
+public class SolaryEconomy implements Listener
+{
 
-	public SolaryEconomy(JavaPlugin plugin) {
+	public SolaryEconomy(JavaPlugin plugin)
+	{
 		instance = plugin;
 	}
 
@@ -37,16 +43,15 @@ public class SolaryEconomy implements Listener {
 	public static JavaPlugin instance;
 	public static Database database;
 	public static Mensagens mensagens;
-	public static Economia economia;
-	public static RefreshMoneyTop refreshMoneyTop;
+	public static MoneyRunnables moneyRunnables;
 	public static Config config;
 
-	public void onEnable() {
+	public void onEnable()
+	{
 		config = new Config(instance, "config.yml");
-		database();
+		this.database();
 		mensagens = new Mensagens(instance);
-		economia = new Economia();
-		refreshMoneyTop = new RefreshMoneyTop();
+
 		instance.getServer().getPluginManager().registerEvents(this, instance);
 		if (config.getYaml().getBoolean("use_vault")) {
 			try {
@@ -66,9 +71,16 @@ public class SolaryEconomy implements Listener {
 			}
 		}
 
+		moneyRunnables = new MoneyRunnables();
+		moneyRunnables.start();
 	}
 
-	public void onDisable() {
+	public void onDisable()
+	{
+		moneyRunnables.stop();
+
+		Economia.saveAll();
+
 		if (database != null) {
 			if (database.connection()) {
 				database.close();
@@ -77,7 +89,8 @@ public class SolaryEconomy implements Listener {
 
 	}
 
-	public void database() {
+	public void database()
+	{
 		try {
 			FileConfiguration config = instance.getConfig();
 			boolean usemysql = config.getBoolean("mysql.enable");
@@ -119,26 +132,47 @@ public class SolaryEconomy implements Listener {
 		}
 	}
 
-	public static String numberFormat(BigDecimal bigDecimal) {
+	public static String numberFormat(BigDecimal bigDecimal)
+	{
 		String formated = "";
 		double doubleValue = bigDecimal.doubleValue();
 		DecimalFormat decimalFormat = new DecimalFormat("#,###", new DecimalFormatSymbols(Locale.GERMAN));
 		formated += decimalFormat.format(bigDecimal);
-		
-		if (doubleValue >= -1 && doubleValue <= 1)
+
+		if ((doubleValue >= -1) && (doubleValue <= 1)) {
 			formated += " " + config.getString("currency_name.singular");
-		else
+		} else {
 			formated += " " + config.getString("currency_name.plural");
+		}
 
 		return formated;
 	}
 
-	@EventHandler
-	public void onJoin(PlayerJoinEvent event) {
-		if (!economia.existsAccount(event.getPlayer().getName())) {
-			economia.createAccount(event.getPlayer().getName(),
-					new BigDecimal(config.getYaml().getDouble("start_value")));
+	@EventHandler(priority = EventPriority.HIGH)
+	public void onJoin(PlayerJoinEvent event)
+	{
+		Player player = event.getPlayer();
+		if (player != null) {
+			if (!Economia.hasAccount(player)) {
+				Economia.createAccount(player, new BigDecimal(SolaryEconomy.config.getYaml().getDouble("start_value")));
+			}
 		}
+	}
+
+	@EventHandler(priority = EventPriority.HIGH)
+	public void onQuit(PlayerQuitEvent event)
+	{
+		Player player = event.getPlayer();
+		if (player != null) {
+			Account account = Economia.getAccount(player);
+			if (account != null) {
+				Economia.save(account);
+				Economia.ACCOUNTS.remove(player.getUniqueId());
+
+			}
+
+		}
+
 	}
 
 }

@@ -19,16 +19,21 @@ import nuvemplugins.solaryeconomy.commands.subcommands.SubCmdMagnata;
 import nuvemplugins.solaryeconomy.commands.subcommands.SubCmdPay;
 import nuvemplugins.solaryeconomy.commands.subcommands.SubCmdReload;
 import nuvemplugins.solaryeconomy.commands.subcommands.SubCmdRemove;
+import nuvemplugins.solaryeconomy.commands.subcommands.SubCmdSaveall;
 import nuvemplugins.solaryeconomy.commands.subcommands.SubCmdSet;
+import nuvemplugins.solaryeconomy.commands.subcommands.SubCmdTeste;
 import nuvemplugins.solaryeconomy.commands.subcommands.SubCmdToggle;
 import nuvemplugins.solaryeconomy.commands.subcommands.SubCmdTop;
+import nuvemplugins.solaryeconomy.plugin.Economia;
 
-public class SolaryCommand implements CommandExecutor {
+public class SolaryCommand implements CommandExecutor
+{
 
 	private List<SubCommand> subcommands;
 
-	public SolaryCommand(String command) {
-		this.subcommands = new ArrayList<SubCommand>();
+	public SolaryCommand(String command)
+	{
+		this.subcommands = new ArrayList<>();
 		this.subcommands.add(new SubCmdHelp(command));
 		this.subcommands.add(new SubCmdTop(command));
 		this.subcommands.add(new SubCmdCriar(command));
@@ -39,16 +44,19 @@ public class SolaryCommand implements CommandExecutor {
 		this.subcommands.add(new SubCmdPay(command));
 		this.subcommands.add(new SubCmdToggle(command));
 		this.subcommands.add(new SubCmdReload(command));
+		this.subcommands.add(new SubCmdSaveall(command));
 		this.subcommands.add(new SubCmdMagnata(command));
+		this.subcommands.add(new SubCmdTeste(command));
 	}
 
 	@Override
-	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args)
+	{
 		if (sender instanceof Player) {
-			if (!SolaryEconomy.economia.existsAccount(sender.getName()))
-				SolaryEconomy.economia.createAccount(sender.getName(),
+			if (!Economia.hasAccount(sender.getName())) {
+				Economia.createAccount(sender.getName(),
 						new BigDecimal(SolaryEconomy.config.getYaml().getDouble("start_value")));
-
+			}
 		}
 		if (args.length >= 1) {
 			String arg = args[0].toLowerCase();
@@ -67,32 +75,28 @@ public class SolaryCommand implements CommandExecutor {
 			}
 
 			if (sender.hasPermission("solaryeconomy.commands.money.other")) {
-				if (SolaryEconomy.economia.existsAccount(args[0])) {
+				if (Economia.hasAccount(args[0])) {
 					if (sender.getName().equals(args[0])) {
 						if (sender instanceof Player) {
 							sender.sendMessage(SolaryEconomy.mensagens.get("MONEY").replace("{valor}",
-									SolaryEconomy.numberFormat(SolaryEconomy.economia.getBalance(sender.getName()))));
+									SolaryEconomy.numberFormat(Economia.getBalance(sender.getName()))));
 						} else {
-							sender.sendMessage("งa/" + command.getName() + " ajuda ง8- ง7ver os comandos do plugin.");
+							sender.sendMessage("ยงa/" + command.getName() + " ajuda ยง8- ยง7ver os comandos do plugin.");
 						}
 					} else {
 						sender.sendMessage(SolaryEconomy.mensagens.get("MONEY_OTHER")
-								.replace("{valor}",
-										SolaryEconomy.numberFormat(SolaryEconomy.economia.getBalance(args[0])))
+								.replace("{valor}", SolaryEconomy.numberFormat(Economia.getBalance(args[0])))
 								.replace("{player}", args[0]));
 					}
 				} else {
 					sender.sendMessage(SolaryEconomy.mensagens.get("PLAYER_NOTFOUND").replace("{player}", args[0]));
 				}
-
 			}
+		} else if (sender instanceof Player) {
+			sender.sendMessage(SolaryEconomy.mensagens.get("MONEY").replace("{valor}",
+					SolaryEconomy.numberFormat(Economia.getBalance(sender.getName()))));
 		} else {
-			if (sender instanceof Player) {
-				sender.sendMessage(SolaryEconomy.mensagens.get("MONEY").replace("{valor}",
-						SolaryEconomy.numberFormat(SolaryEconomy.economia.getBalance(sender.getName()))));
-			} else {
-				sender.sendMessage("งa/" + command.getName() + " ajuda ง8- ง7ver os comandos do plugin.");
-			}
+			sender.sendMessage("ยงa/" + command.getName() + " ajuda ยง8- ยง7ver os comandos do plugin.");
 		}
 
 		return false;

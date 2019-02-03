@@ -2,42 +2,39 @@ package nuvemplugins.solaryeconomy;
 
 import java.util.List;
 
-import nuvemplugins.solaryeconomy.app.SolaryEconomy;
 import nuvemplugins.solaryeconomy.plugin.Economia;
 import nuvemplugins.solaryeconomy.plugin.objetos.Account;
 
 /**
- * Esta classe é para auxiliar na criação de novos plugins usando a api do
+ * Esta classe Ã© para auxiliar na criaÃ§Ã£o de novos plugins usando a api do
  * Solary-Economy
  * 
  */
 
-public class API {
-
-	public API() {
-		this.economia = SolaryEconomy.economia;
-	}
-
-	private Economia economia;
+public class API
+{
 
 	// Pega o magnata atual do servidor.
-	public Account getMagnata() {
-		return this.economia.getMagnata();
+	public Account getMagnata()
+	{
+		return Economia.MAGNATA;
 	}
 
 	// Retorna true se a conta estiver com o coins desabilitado, ou false caso
-	// contrário
-	public boolean isToggle(String account) {
-		return this.economia.isToggle(account);
+	// contrÂ§rio
+	public boolean isToggle(String account)
+	{
+		return Economia.isToggle(account);
 	}
 
 	// Retorna o money top atual do servidor.
-	public List<Account> getMoneyTop() {
-		return this.economia.getMoneyTop();
+	public List<Account> getMoneyTop()
+	{
+		return Economia.MONEY_TOP;
 	}
 
 	/*
-	 * Você pode usar a classe 'Economia' para integrar qualquer plugin ao
+	 * VocÃª pode usar a classe 'Economia' para integrar qualquer plugin ao
 	 * Solary-Economy *
 	 */
 }

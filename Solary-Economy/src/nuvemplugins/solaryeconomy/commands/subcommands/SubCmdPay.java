@@ -8,15 +8,19 @@ import org.bukkit.entity.Player;
 
 import nuvemplugins.solaryeconomy.abstracts.SubCommand;
 import nuvemplugins.solaryeconomy.app.SolaryEconomy;
+import nuvemplugins.solaryeconomy.plugin.Economia;
 
-public class SubCmdPay extends SubCommand {
+public class SubCmdPay extends SubCommand
+{
 
-	public SubCmdPay(String command) {
-		super("pay", "§cUse: /" + command + " pay [jogador] [valor]", "solaryeconomy.commands.pay", "pagar", "enviar");
+	public SubCmdPay(String command)
+	{
+		super("pay", "Â§cUse: /" + command + " pay [jogador] [valor]", "solaryeconomy.commands.pay", "pagar", "enviar");
 	}
 
 	@Override
-	public void execute(CommandSender sender, String[] args) {
+	public void execute(CommandSender sender, String[] args)
+	{
 		if (args.length >= 3) {
 			String nome = args[1];
 
@@ -27,19 +31,20 @@ public class SubCmdPay extends SubCommand {
 				return;
 			}
 
-			if (!(sender instanceof Player))
+			if (!(sender instanceof Player)) {
 				return;
+			}
 
 			if (sender.getName().equalsIgnoreCase(nome)) {
 				sender.sendMessage(SolaryEconomy.mensagens.get("MONEY_PAY_ERRO"));
 				return;
 			}
 
-			if (SolaryEconomy.economia.hasBalance(sender.getName(), valor)) {
+			if (Economia.hasBalance(sender.getName(), valor)) {
 
-				if (!SolaryEconomy.economia.isToggle(nome)) {
-					if (SolaryEconomy.economia.addBalance(nome, valor)) {
-						SolaryEconomy.economia.substractBalance(sender.getName(), valor);
+				if (!Economia.isToggle(nome)) {
+					if (Economia.addBalance(nome, valor)) {
+						Economia.substractBalance(sender.getName(), valor);
 						sender.sendMessage(SolaryEconomy.mensagens.get("MONEY_PAY_SENDER").replace("{player}", nome)
 								.replace("{valor}", SolaryEconomy.numberFormat(valor)));
 
@@ -63,7 +68,7 @@ public class SubCmdPay extends SubCommand {
 			}
 
 		} else {
-			sender.sendMessage(getUsage());
+			sender.sendMessage(this.getUsage());
 		}
 
 	}

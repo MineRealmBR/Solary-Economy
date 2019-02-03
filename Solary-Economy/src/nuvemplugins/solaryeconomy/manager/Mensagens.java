@@ -4,23 +4,27 @@ import org.bukkit.plugin.Plugin;
 
 import nuvemplugins.solaryeconomy.util.Config;
 
-public class Mensagens {
+public class Mensagens
+{
 
 	private Config config;
 	private Plugin plugin;
 
-	public Mensagens(Plugin plugin) {
+	public Mensagens(Plugin plugin)
+	{
 		this.plugin = plugin;
-		reload();
+		this.reload();
 	}
 
-	public void reload() {
+	public void reload()
+	{
 		this.config = new Config(this.plugin, "mensagens.yml");
 	}
 
-	public String get(String string) {
+	public String get(String string)
+	{
 		string = string.toUpperCase();
-		return this.config.getString(string).replace("&", "ง");
+		return this.config.getString(string).replace("&", "ยง");
 	}
 
 }

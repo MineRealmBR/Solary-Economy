@@ -2,12 +2,15 @@ package nuvemplugins.solaryeconomy.util;
 
 import java.math.BigDecimal;
 
-public class Numbers {
+public class Numbers
+{
 
-	public Numbers() {
+	public Numbers()
+	{
 	}
 
-	public BigDecimal getDecimal(String numberString) {
+	public BigDecimal getDecimal(String numberString)
+	{
 		try {
 			return new BigDecimal(numberString);
 		} catch (Exception exception) {

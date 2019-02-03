@@ -8,9 +8,11 @@ import java.sql.Statement;
 
 import org.bukkit.plugin.Plugin;
 
-public class SQLite implements Database {
+public class SQLite implements Database
+{
 
-	public SQLite(Plugin plugin) {
+	public SQLite(Plugin plugin)
+	{
 		this.plugin = plugin;
 	}
 
@@ -19,19 +21,21 @@ public class SQLite implements Database {
 	private Statement statement;
 
 	@Override
-	public Connection getConnection() {
+	public Connection getConnection()
+	{
 		return this.connection;
 	}
 
 	@Override
-	public boolean open() {
+	public boolean open()
+	{
 		try {
 			Class.forName("org.sqlite.JDBC");
 			if (this.connection == null) {
 				this.connection = DriverManager
 						.getConnection("jdbc:sqlite:" + this.plugin.getDataFolder().getPath() + "/database.db");
 			}
-			if (this.statement == null && this.connection != null) {
+			if ((this.statement == null) && (this.connection != null)) {
 				this.statement = this.connection.createStatement();
 			}
 		} catch (Exception exception) {
@@ -41,18 +45,22 @@ public class SQLite implements Database {
 	}
 
 	@Override
-	public boolean connection() {
+	public boolean connection()
+	{
 		return this.connection != null;
 	}
 
 	@Override
-	public boolean close() {
-		if (connection()) {
+	public boolean close()
+	{
+		if (this.connection()) {
 			try {
-				if (this.statement != null)
+				if (this.statement != null) {
 					this.statement.close();
-				if (this.connection != null)
+				}
+				if (this.connection != null) {
 					this.connection.close();
+				}
 
 				this.statement = null;
 				this.connection = null;
@@ -60,41 +68,48 @@ public class SQLite implements Database {
 				e.printStackTrace();
 			}
 		}
-		return connection();
+		return this.connection();
 	}
 
 	@Override
-	public String getHostname() {
+	public String getHostname()
+	{
 		return "localhost";
 	}
 
 	@Override
-	public String getDatabase() {
+	public String getDatabase()
+	{
 		return "database.db";
 	}
 
 	@Override
-	public String getUsername() {
+	public String getUsername()
+	{
 		return "root";
 	}
 
 	@Override
-	public String getPassword() {
+	public String getPassword()
+	{
 		return "";
 	}
 
 	@Override
-	public String getType() {
+	public String getType()
+	{
 		return "SQLite";
 	}
 
 	@Override
-	public int getPort() {
+	public int getPort()
+	{
 		return 3306;
 	}
 
 	@Override
-	public ResultSet query(String query) {
+	public ResultSet query(String query)
+	{
 		try {
 			return this.statement.executeQuery(query);
 		} catch (Exception e) {
@@ -104,7 +119,8 @@ public class SQLite implements Database {
 	}
 
 	@Override
-	public boolean execute(String string) {
+	public boolean execute(String string)
+	{
 		try {
 			return this.statement.execute(string);
 		} catch (SQLException e) {
@@ -114,7 +130,8 @@ public class SQLite implements Database {
 	}
 
 	@Override
-	public Statement getStatement() {
+	public Statement getStatement()
+	{
 		return this.statement;
 	}
 

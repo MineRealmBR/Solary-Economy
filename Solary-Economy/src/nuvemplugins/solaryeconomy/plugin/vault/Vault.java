@@ -6,13 +6,16 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import net.milkbowl.vault.chat.Chat;
 import nuvemplugins.solaryeconomy.app.SolaryEconomy;
 
-public class Vault {
+public class Vault
+{
 
-	public Vault() {
+	public Vault()
+	{
 	}
 
 	@SuppressWarnings("deprecation")
-	public static String getPrefix(String player) {
+	public static String getPrefix(String player)
+	{
 
 		String prefix = "";
 		try {
@@ -21,8 +24,10 @@ public class Vault {
 				Chat chat = chatclazz.getProvider();
 				if (chat != null) {
 					try {
-						prefix = chat.getPlayerPrefix(SolaryEconomy.config.getString(SolaryEconomy.instance.getConfig().getString("world")), player).replace("&",
-								"ง");
+						prefix = chat
+								.getPlayerPrefix(SolaryEconomy.config
+										.getString(SolaryEconomy.instance.getConfig().getString("world")), player)
+								.replace("&", "ยง");
 					} catch (Exception e) {
 						prefix = "";
 					}

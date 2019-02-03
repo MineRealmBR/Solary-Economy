@@ -6,15 +6,19 @@ import org.bukkit.command.CommandSender;
 
 import nuvemplugins.solaryeconomy.abstracts.SubCommand;
 import nuvemplugins.solaryeconomy.app.SolaryEconomy;
+import nuvemplugins.solaryeconomy.plugin.Economia;
 
-public class SubCmdAdd extends SubCommand {
+public class SubCmdAdd extends SubCommand
+{
 
-	public SubCmdAdd(String command) {
-		super("add", "§cUse: /" + command + " add [jogador] [valor]", "solaryeconomy.commands.add", "give");
+	public SubCmdAdd(String command)
+	{
+		super("add", "Â§cUse: /" + command + " add [jogador] [valor]", "solaryeconomy.commands.add", "give");
 	}
 
 	@Override
-	public void execute(CommandSender sender, String[] args) {
+	public void execute(CommandSender sender, String[] args)
+	{
 		if (args.length >= 3) {
 
 			String nome = args[1];
@@ -26,7 +30,7 @@ public class SubCmdAdd extends SubCommand {
 				return;
 			}
 
-			if (SolaryEconomy.economia.addBalance(nome, valor)) {
+			if (Economia.addBalance(nome, valor)) {
 				sender.sendMessage(SolaryEconomy.mensagens.get("MONEY_ADD").replace("{player}", nome).replace("{valor}",
 						SolaryEconomy.numberFormat(valor)));
 			} else {
@@ -34,7 +38,7 @@ public class SubCmdAdd extends SubCommand {
 			}
 
 		} else {
-			sender.sendMessage(getUsage());
+			sender.sendMessage(this.getUsage());
 		}
 
 	}

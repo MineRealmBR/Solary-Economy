@@ -4,20 +4,21 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public interface Database {
+public interface Database
+{
 
 	public abstract boolean open();
 
 	public abstract boolean close();
 
 	public abstract boolean connection();
-	
+
 	public abstract ResultSet query(String query);
-	
+
 	public abstract boolean execute(String string);
 
 	public abstract Connection getConnection();
-	
+
 	public abstract Statement getStatement();
 
 	public abstract String getHostname();

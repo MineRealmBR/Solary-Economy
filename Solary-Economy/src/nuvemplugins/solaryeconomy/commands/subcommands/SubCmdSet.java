@@ -6,15 +6,19 @@ import org.bukkit.command.CommandSender;
 
 import nuvemplugins.solaryeconomy.abstracts.SubCommand;
 import nuvemplugins.solaryeconomy.app.SolaryEconomy;
+import nuvemplugins.solaryeconomy.plugin.Economia;
 
-public class SubCmdSet extends SubCommand {
+public class SubCmdSet extends SubCommand
+{
 
-	public SubCmdSet(String command) {
-		super("set", "§cUse: /" + command + " set [jogador] [valor]", "solaryeconomy.commands.set", "definir", "setar");
+	public SubCmdSet(String command)
+	{
+		super("set", "Â§cUse: /" + command + " set [jogador] [valor]", "solaryeconomy.commands.set", "definir", "setar");
 	}
 
 	@Override
-	public void execute(CommandSender sender, String[] args) {
+	public void execute(CommandSender sender, String[] args)
+	{
 		if (args.length >= 3) {
 			String nome = args[1];
 			BigDecimal valor = this.numbers.getDecimal(args[2]);
@@ -24,7 +28,7 @@ public class SubCmdSet extends SubCommand {
 				return;
 			}
 
-			if (SolaryEconomy.economia.setBalance(nome, valor)) {
+			if (Economia.setBalance(nome, valor)) {
 				sender.sendMessage(SolaryEconomy.mensagens.get("MONEY_SET").replace("{player}", nome).replace("{valor}",
 						SolaryEconomy.numberFormat(valor)));
 			} else {
@@ -32,7 +36,7 @@ public class SubCmdSet extends SubCommand {
 			}
 
 		} else {
-			sender.sendMessage(getUsage());
+			sender.sendMessage(this.getUsage());
 		}
 
 	}

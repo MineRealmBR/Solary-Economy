@@ -5,66 +5,82 @@ import org.bukkit.entity.Player;
 
 import nuvemplugins.solaryeconomy.abstracts.SubCommand;
 
-public class SubCmdHelp extends SubCommand {
+public class SubCmdHelp extends SubCommand
+{
 
 	private String command;
 
-	public SubCmdHelp(String command) {
-		super("help", "งcUse: /" + command + " ajuda", "", "ajuda", "?");
+	public SubCmdHelp(String command)
+	{
+		super("help", "ยงcUse: /" + command + " ajuda", "", "ajuda", "?");
 		this.command = command;
 	}
 
 	@Override
-	public void execute(CommandSender sender, String[] args) {
+	public void execute(CommandSender sender, String[] args)
+	{
 		sender.sendMessage(" ");
 
 		if (sender instanceof Player) {
-			sender.sendMessage("งa/" + command + " ง8- ง7ver seu saldo atual.");
-			if (sender.hasPermission("solaryeconomy.commands.money.other"))
-				sender.sendMessage("งa/" + command + " [jogador]ง8- ง7ver o saldo atual de um jogador.");
+			sender.sendMessage("ยงa/" + this.command + " ยง8- ยง7ver seu saldo atual.");
+			if (sender.hasPermission("solaryeconomy.commands.money.other")) {
+				sender.sendMessage("ยงa/" + this.command + " [jogador]ยง8- ยง7ver o saldo atual de um jogador.");
+			}
 
-			if (sender.hasPermission("solaryeconomy.commands.pay"))
-				sender.sendMessage("งa/" + command + " pay [jogador] [valor] ง8- ง7envia money a um jogador.");
+			if (sender.hasPermission("solaryeconomy.commands.pay")) {
+				sender.sendMessage("ยงa/" + this.command + " pay [jogador] [valor] ยง8- ยง7envia money a um jogador.");
+			}
 
-			if (sender.hasPermission("solaryeconomy.commands.set"))
-				sender.sendMessage("งa/" + command + " set [jogador] [valor] ง8- ง7seta o money de um jogador.");
+			if (sender.hasPermission("solaryeconomy.commands.set")) {
+				sender.sendMessage("ยงa/" + this.command + " set [jogador] [valor] ยง8- ยง7seta o money de um jogador.");
+			}
 
-			if (sender.hasPermission("solaryeconomy.commands.add"))
-				sender.sendMessage("งa/" + command + " add [jogador] [valor] ง8- ง7adicionar money a um jogador.");
+			if (sender.hasPermission("solaryeconomy.commands.add")) {
+				sender.sendMessage("ยงa/" + this.command + " add [jogador] [valor] ยง8- ยง7adicionar money a um jogador.");
+			}
 
-			if (sender.hasPermission("solaryeconomy.commands.remove"))
-				sender.sendMessage("งa/" + command + " remove [jogador] [valor] ง8- ง7remove money de um jogador.");
+			if (sender.hasPermission("solaryeconomy.commands.remove")) {
+				sender.sendMessage(
+						"ยงa/" + this.command + " remove [jogador] [valor] ยง8- ยง7remove money de um jogador.");
+			}
 
-			if (sender.hasPermission("solaryeconomy.commands.top"))
-				sender.sendMessage("งa/" + command + " top ง8- ง7ver o money top do servidor.");
+			if (sender.hasPermission("solaryeconomy.commands.top")) {
+				sender.sendMessage("ยงa/" + this.command + " top ยง8- ยง7ver o money top do servidor.");
+			}
 
-			sender.sendMessage("งa/" + command + " ajuda ง8- ง7ver os comandos do plugin.");
+			sender.sendMessage("ยงa/" + this.command + " ajuda ยง8- ยง7ver os comandos do plugin.");
 
-			if (sender.hasPermission("solaryeconomy.commands.toggle"))
-				sender.sendMessage("งa/" + command + " toggle ง8- ง7habilitar/desabilitar o recebimento de coins.");
+			if (sender.hasPermission("solaryeconomy.commands.toggle")) {
+				sender.sendMessage(
+						"ยงa/" + this.command + " toggle ยง8- ยง7habilitar/desabilitar o recebimento de coins.");
+			}
 
-			if (sender.hasPermission("solaryeconomy.commands.criar"))
-				sender.sendMessage("งa/" + command + " criar [nome] [valor] ง8- ง7criar uma conta.");
+			if (sender.hasPermission("solaryeconomy.commands.criar")) {
+				sender.sendMessage("ยงa/" + this.command + " criar [nome] [valor] ยง8- ยง7criar uma conta.");
+			}
 
-			if (sender.hasPermission("solaryeconomy.commands.deletar"))
-				sender.sendMessage("งa/" + command + " deletar [nome] [valor] ง8- ง7deletar uma conta.");
+			if (sender.hasPermission("solaryeconomy.commands.deletar")) {
+				sender.sendMessage("ยงa/" + this.command + " deletar [nome] [valor] ยง8- ยง7deletar uma conta.");
+			}
 
-			if (sender.hasPermission("solaryeconomy.commands.reload"))
-				sender.sendMessage("งa/" + command + " reload ง8- ง7recarregar os arquivos de configs.");
-			if (sender.hasPermission("solaryeconomy.commands.magnata"))
-				sender.sendMessage("งa/" + command + " magnata ง8- ง7ver o magnata atual do servidor.");
+			if (sender.hasPermission("solaryeconomy.commands.reload")) {
+				sender.sendMessage("ยงa/" + this.command + " reload ยง8- ยง7recarregar os arquivos de configs.");
+			}
+			if (sender.hasPermission("solaryeconomy.commands.magnata")) {
+				sender.sendMessage("ยงa/" + this.command + " magnata ยง8- ยง7ver o magnata atual do servidor.");
+			}
 		} else {
-			sender.sendMessage("งa/" + command + " [jogador]ง8- ง7ver o saldo atual de um jogador.");
-			sender.sendMessage("งa/" + command + " set [jogador] [valor] ง8- ง7seta o money de um jogador.");
-			sender.sendMessage("งa/" + command + " add [jogador] [valor] ง8- ง7adicionar money a um jogador.");
-			sender.sendMessage("งa/" + command + " remove [jogador] [valor] ง8- ง7remove money de um jogador.");
-			sender.sendMessage("งa/" + command + " top ง8- ง7ver o money top do servidor.");
-			sender.sendMessage("งa/" + command + " ajuda ง8- ง7ver os comandos do plugin.");
-			sender.sendMessage("งa/" + command + " create [jogador] [valor] ง8- ง7criar uma conta.");
-			sender.sendMessage("งa/" + command + " delete [jogador] [valor] ง8- ง7deletar uma conta.");
-			sender.sendMessage("งa/" + command + " converter [plugin] ง8- ง7converter a economia de um plugin.");
-			sender.sendMessage("งa/" + command + " reload ง8- ง7recarregar os arquivos de configs.");
-			sender.sendMessage("งa/" + command + " magnata ง8- ง7ver o magnata atual do servidor.");
+			sender.sendMessage("ยงa/" + this.command + " [jogador]ยง8- ยง7ver o saldo atual de um jogador.");
+			sender.sendMessage("ยงa/" + this.command + " set [jogador] [valor] ยง8- ยง7seta o money de um jogador.");
+			sender.sendMessage("ยงa/" + this.command + " add [jogador] [valor] ยง8- ยง7adicionar money a um jogador.");
+			sender.sendMessage("ยงa/" + this.command + " remove [jogador] [valor] ยง8- ยง7remove money de um jogador.");
+			sender.sendMessage("ยงa/" + this.command + " top ยง8- ยง7ver o money top do servidor.");
+			sender.sendMessage("ยงa/" + this.command + " ajuda ยง8- ยง7ver os comandos do plugin.");
+			sender.sendMessage("ยงa/" + this.command + " create [jogador] [valor] ยง8- ยง7criar uma conta.");
+			sender.sendMessage("ยงa/" + this.command + " delete [jogador] [valor] ยง8- ยง7deletar uma conta.");
+			sender.sendMessage("ยงa/" + this.command + " converter [plugin] ยง8- ยง7converter a economia de um plugin.");
+			sender.sendMessage("ยงa/" + this.command + " reload ยง8- ยง7recarregar os arquivos de configs.");
+			sender.sendMessage("ยงa/" + this.command + " magnata ยง8- ยง7ver o magnata atual do servidor.");
 		}
 
 		sender.sendMessage(" ");

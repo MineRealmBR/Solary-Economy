@@ -6,19 +6,24 @@ import org.bukkit.plugin.Plugin;
 
 import nuvemplugins.solaryeconomy.abstracts.SubCommand;
 import nuvemplugins.solaryeconomy.app.SolaryEconomy;
+import nuvemplugins.solaryeconomy.plugin.Economia;
 import nuvemplugins.solaryeconomy.plugin.objetos.Account;
 import nuvemplugins.solaryeconomy.plugin.vault.Vault;
 
-public class SubCmdMagnata extends SubCommand {
+public class SubCmdMagnata extends SubCommand
+{
 
-	public SubCmdMagnata(String command) {
-		super("magnata", "§cUse: /" + command + " magnata", "solaryeconomy.commands.magnata");
+	public SubCmdMagnata(String command)
+	{
+		super("magnata", "Â§cUse: /" + command + " magnata", "solaryeconomy.commands.magnata");
 	}
 
 	@Override
-	public void execute(CommandSender sender, String[] args) {
+	public void execute(CommandSender sender, String[] args)
+	{
 
-		Account account = SolaryEconomy.economia.getMagnata();
+		Account account = Economia.MAGNATA;
+
 		sender.sendMessage(" ");
 		if (account != null) {
 			String accountname = account.getName();
