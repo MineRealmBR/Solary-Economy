@@ -7,7 +7,7 @@ import org.bukkit.plugin.Plugin;
 import nuvemplugins.solaryeconomy.abstracts.SubCommand;
 import nuvemplugins.solaryeconomy.app.SolaryEconomy;
 import nuvemplugins.solaryeconomy.plugin.Economia;
-import nuvemplugins.solaryeconomy.plugin.objetos.Account;
+import nuvemplugins.solaryeconomy.plugin.objetos.MoneyTopAccount;
 import nuvemplugins.solaryeconomy.plugin.vault.Vault;
 
 public class SubCmdMagnata extends SubCommand
@@ -22,7 +22,7 @@ public class SubCmdMagnata extends SubCommand
 	public void execute(CommandSender sender, String[] args)
 	{
 
-		Account account = Economia.MAGNATA;
+		MoneyTopAccount account = Economia.MAGNATA;
 
 		sender.sendMessage(" ");
 		if (account != null) {

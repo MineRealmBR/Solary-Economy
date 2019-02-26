@@ -8,7 +8,7 @@ import org.bukkit.event.Listener;
 import br.com.devpaulo.legendchat.api.events.ChatMessageEvent;
 import nuvemplugins.solaryeconomy.app.SolaryEconomy;
 import nuvemplugins.solaryeconomy.plugin.Economia;
-import nuvemplugins.solaryeconomy.plugin.objetos.Account;
+import nuvemplugins.solaryeconomy.plugin.objetos.MoneyTopAccount;
 
 public class LegendChatListeners implements Listener
 {
@@ -27,7 +27,7 @@ public class LegendChatListeners implements Listener
 				magnata_tag = "§a[$]";
 			}
 
-			Account magnata = Economia.MAGNATA;
+			MoneyTopAccount magnata = Economia.MAGNATA;
 			Player player = event.getSender();
 
 			if ((magnata != null) && (player != null) && player.getName().equals(magnata.getName())) {

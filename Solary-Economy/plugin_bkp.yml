@@ -3,7 +3,8 @@ main: nuvemplugins.solaryeconomy.Main
 version: 1.5
 author: Sr_Edition
 website: www.nuvemplugins.com
-depend: [Vault, BukkitEngine]
+softdepend: [Vault, BukkitEngine]
+load: STARTUP
 commands:
   money:
     description: "Para ver o money atual"

@@ -9,7 +9,7 @@ import org.bukkit.plugin.Plugin;
 import nuvemplugins.solaryeconomy.abstracts.SubCommand;
 import nuvemplugins.solaryeconomy.app.SolaryEconomy;
 import nuvemplugins.solaryeconomy.plugin.Economia;
-import nuvemplugins.solaryeconomy.plugin.objetos.Account;
+import nuvemplugins.solaryeconomy.plugin.objetos.MoneyTopAccount;
 import nuvemplugins.solaryeconomy.plugin.vault.Vault;
 
 public class SubCmdTop extends SubCommand
@@ -23,13 +23,13 @@ public class SubCmdTop extends SubCommand
 	@Override
 	public void execute(CommandSender sender, String[] args)
 	{
-		List<Account> moneytop = Economia.MONEY_TOP;
+		List<MoneyTopAccount> moneytop = Economia.MONEY_TOP;
 
 		if (!moneytop.isEmpty()) {
 			int i = 1;
 			sender.sendMessage(SolaryEconomy.mensagens.get("MONEY_TOP_TITLE"));
 			sender.sendMessage(" ");
-			for (Account account : moneytop) {
+			for (MoneyTopAccount account : moneytop) {
 				String valor = SolaryEconomy.numberFormat(account.getBalance());
 				String accountname = account.getName();
 				if (SolaryEconomy.config.getYaml().getBoolean("economy_top.prefix")) {
