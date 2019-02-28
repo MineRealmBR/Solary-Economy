@@ -23,8 +23,7 @@ import nuvemplugins.solaryeconomy.util.Config;
 public class SolaryEconomy implements Listener
 {
 
-	public SolaryEconomy(JavaPlugin plugin)
-	{
+	public SolaryEconomy(JavaPlugin plugin) {
 		instance = plugin;
 	}
 
@@ -51,8 +50,17 @@ public class SolaryEconomy implements Listener
 				if (vault != null) {
 					new VaultEconomy();
 				}
-				Plugin legendchat = Bukkit.getPluginManager().getPlugin("Legendchat");
-				if (legendchat != null) {
+				boolean usingLegendChatEvent = false;
+
+				try {
+					Class<?> chatMessageEventClass = Class
+							.forName("br.com.devpaulo.legendchat.api.events.ChatMessageEvent");
+					usingLegendChatEvent = (chatMessageEventClass != null);
+				} catch (Exception exception) {
+					usingLegendChatEvent = false;
+				}
+
+				if (usingLegendChatEvent) {
 					Class<?> listener_clazz = Class
 							.forName("nuvemplugins.solaryeconomy.plugin.listener.LegendChatListeners");
 					Object listener = listener_clazz.getConstructor(new Class[0]).newInstance(new Object[0]);
