@@ -13,6 +13,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import nuvemplugins.solaryeconomy.manager.Mensagens;
 import nuvemplugins.solaryeconomy.plugin.Economia;
@@ -70,11 +71,18 @@ public class SolaryEconomy implements Listener
 				exception.printStackTrace();
 			}
 		}
+		
+		new BukkitRunnable() {
+			@Override
+			public void run()
+			{
+				Economia.loadAll();
+				
+				moneyRunnables = new MoneyRunnables();
+				moneyRunnables.start();
 
-		Economia.loadAll();
-
-		moneyRunnables = new MoneyRunnables();
-		moneyRunnables.start();
+			}
+		}.runTaskLater(instance, (30));
 	}
 
 	public void onDisable()

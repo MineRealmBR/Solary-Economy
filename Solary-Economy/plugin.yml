@@ -1,6 +1,7 @@
 name: Solary-Economy
 main: nuvemplugins.solaryeconomy.Main
 version: 1.5
+load: STARTUP
 author: Sr_Edition
 website: www.nuvemplugins.com
 depend: [Vault, BukkitEngine]
