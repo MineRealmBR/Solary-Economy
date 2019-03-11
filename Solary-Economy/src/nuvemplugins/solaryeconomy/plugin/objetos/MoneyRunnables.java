@@ -10,16 +10,14 @@ public class MoneyRunnables
 
 	private BukkitRunnable moneyTopRunnable;
 
-	public MoneyRunnables()
-	{
+	public MoneyRunnables() {
 		this.start();
 	}
 
 	public void start()
 	{
 		if (this.moneyTopRunnable == null) {
-			this.moneyTopRunnable = new BukkitRunnable()
-			{
+			this.moneyTopRunnable = new BukkitRunnable() {
 				@Override
 				public void run()
 				{
@@ -27,7 +25,7 @@ public class MoneyRunnables
 				}
 			};
 			this.moneyTopRunnable.runTaskTimerAsynchronously(SolaryEconomy.instance, 20,
-					SolaryEconomy.config.getYaml().getInt("economy_top.refresh_time"));
+					(SolaryEconomy.config.getYaml().getInt("economy_top.refresh_time") * 20));
 		}
 
 	}

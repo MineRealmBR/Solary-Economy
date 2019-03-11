@@ -25,6 +25,10 @@ import nuvemplugins.solaryeconomy.plugin.vault.Vault;
 
 public class Economia
 {
+	public static void main(String[] args)
+	{
+		System.out.println(new BigDecimal(35.0).add(new BigDecimal(16.0)).toPlainString());
+	}
 
 	public static final Map<UUID, Account> ACCOUNTS = new HashMap<>();
 	public static List<MoneyTopAccount> MONEY_TOP = new ArrayList<>();
@@ -33,11 +37,11 @@ public class Economia
 	public static void loadAll()
 	{
 		File userdataFolder = BukkitUserData.USERDATA_FOLDER;
-		if (userdataFolder != null && userdataFolder.isDirectory()) {
+		if ((userdataFolder != null) && userdataFolder.isDirectory()) {
 			for (File file : userdataFolder.listFiles()) {
 				try {
 					String fileName = file.getName();
-					if ((fileName != null && !fileName.isEmpty()) && fileName.endsWith(".json")) {
+					if (((fileName != null) && !fileName.isEmpty()) && fileName.endsWith(".json")) {
 						UUID uuid = UUID.fromString(fileName.substring(0, fileName.length() - (".json").length()));
 						OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayer(uuid);
 						if (offlinePlayer != null) {
@@ -80,7 +84,7 @@ public class Economia
 
 	public synchronized static void refreshMoneyTop()
 	{
-		List<MoneyTopAccount> moneyTop = new ArrayList<MoneyTopAccount>();
+		List<MoneyTopAccount> moneyTop = new ArrayList<>();
 
 		for (Account account : ACCOUNTS.values()) {
 			moneyTop.add(MoneyTopAccount.valueOf(account));

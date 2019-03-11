@@ -71,13 +71,13 @@ public class SolaryEconomy implements Listener
 				exception.printStackTrace();
 			}
 		}
-		
+
 		new BukkitRunnable() {
 			@Override
 			public void run()
 			{
 				Economia.loadAll();
-				
+
 				moneyRunnables = new MoneyRunnables();
 				moneyRunnables.start();
 

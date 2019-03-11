@@ -13,8 +13,7 @@ import nuvemplugins.solaryeconomy.plugin.vault.Vault;
 public class SubCmdMagnata extends SubCommand
 {
 
-	public SubCmdMagnata(String command)
-	{
+	public SubCmdMagnata(String command) {
 		super("magnata", "§cUse: /" + command + " magnata", "solaryeconomy.commands.magnata");
 	}
 

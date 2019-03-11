@@ -9,8 +9,7 @@ import nuvemplugins.solaryeconomy.plugin.Economia;
 public class SubCmdToggle extends SubCommand
 {
 
-	public SubCmdToggle(String command)
-	{
+	public SubCmdToggle(String command) {
 		super("toggle", "§cUse: /" + command + " toggle", "solaryeconomy.commands.toggle");
 	}
 

@@ -11,8 +11,7 @@ import nuvemplugins.solaryeconomy.plugin.Economia;
 public class SubCmdAdd extends SubCommand
 {
 
-	public SubCmdAdd(String command)
-	{
+	public SubCmdAdd(String command) {
 		super("add", "§cUse: /" + command + " add [jogador] [valor]", "solaryeconomy.commands.add", "give");
 	}
 

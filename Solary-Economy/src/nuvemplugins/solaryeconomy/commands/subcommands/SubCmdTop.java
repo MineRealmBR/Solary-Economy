@@ -6,6 +6,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
 
+import com.minerealm.bukkit.engine.lib.fanciful.FancyMessage;
+
 import nuvemplugins.solaryeconomy.abstracts.SubCommand;
 import nuvemplugins.solaryeconomy.app.SolaryEconomy;
 import nuvemplugins.solaryeconomy.plugin.Economia;
@@ -15,8 +17,9 @@ import nuvemplugins.solaryeconomy.plugin.vault.Vault;
 public class SubCmdTop extends SubCommand
 {
 
-	public SubCmdTop(String command)
-	{
+	public static final int MONEY_TOP_SIZE = 10;
+
+	public SubCmdTop(String command) {
 		super("top", "§cUse: /" + command + " top", "solaryeconomy.commands.top", "rank");
 	}
 
@@ -49,17 +52,35 @@ public class SubCmdTop extends SubCommand
 							magnata_tag = "§a[$]";
 						}
 						display = magnata_tag.concat(display);
-						sender.sendMessage(SolaryEconomy.mensagens.get("MONEY_TOP_FORMAT").replace("{i}", "" + i)
-								.replace("{player}", display).replace("{valor}", valor));
+
+						FancyMessage fancyMessage = FancyMessage
+								.fromOldMessageFormat(SolaryEconomy.mensagens.get("MONEY_TOP_FORMAT")
+										.replace("{i}", "" + i).replace("{player}", display).replace("{valor}", valor));
+
+						fancyMessage.tooltipAll("§aJogador: §f" + accountname, "§aSaldo: §f" + valor,
+								"§aPosição: §f" + i, "", "§eEste jogador é o atual §2Magnata§e do servidor.");
+						fancyMessage.send(sender);
+
 					} else {
-						sender.sendMessage(SolaryEconomy.mensagens.get("MONEY_TOP_FORMAT").replace("{i}", "" + i)
-								.replace("{player}", accountname).replace("{valor}", valor));
+						FancyMessage fancyMessage = FancyMessage.fromOldMessageFormat(
+								SolaryEconomy.mensagens.get("MONEY_TOP_FORMAT").replace("{i}", "" + i)
+										.replace("{player}", accountname).replace("{valor}", valor));
+
+						fancyMessage.tooltipAll("§aJogador: §f" + accountname, "§aSaldo: §f" + valor,
+								"§aPosição: §f" + i);
+						fancyMessage.send(sender);
 					}
 				} else {
-					sender.sendMessage(SolaryEconomy.mensagens.get("MONEY_TOP_FORMAT").replace("{i}", "" + i)
-							.replace("{player}", accountname).replace("{valor}", valor));
-				}
+					FancyMessage fancyMessage = FancyMessage
+							.fromOldMessageFormat(SolaryEconomy.mensagens.get("MONEY_TOP_FORMAT").replace("{i}", "" + i)
+									.replace("{player}", accountname).replace("{valor}", valor));
 
+					fancyMessage.tooltipAll("§aJogador: §f" + accountname, "§aSaldo: §f" + valor, "§aPosição: §f" + i);
+					fancyMessage.send(sender);
+				}
+				if (i >= MONEY_TOP_SIZE) {
+					break;
+				}
 				i++;
 			}
 			sender.sendMessage(" ");

@@ -13,8 +13,7 @@ import nuvemplugins.solaryeconomy.plugin.Economia;
 public class SubCmdPay extends SubCommand
 {
 
-	public SubCmdPay(String command)
-	{
+	public SubCmdPay(String command) {
 		super("pay", "§cUse: /" + command + " pay [jogador] [valor]", "solaryeconomy.commands.pay", "pagar", "enviar");
 	}
 

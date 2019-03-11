@@ -9,8 +9,7 @@ import nuvemplugins.solaryeconomy.app.SolaryEconomy;
 public class Vault
 {
 
-	public Vault()
-	{
+	public Vault() {
 	}
 
 	@SuppressWarnings("deprecation")

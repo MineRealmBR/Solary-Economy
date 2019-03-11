@@ -7,8 +7,7 @@ public class MoneyTopAccount implements Comparable<MoneyTopAccount>
 	private String name;
 	private BigDecimal balance;
 
-	public MoneyTopAccount(String name, BigDecimal balance)
-	{
+	public MoneyTopAccount(String name, BigDecimal balance) {
 		this.name = name;
 		this.balance = balance;
 	}
@@ -33,11 +32,13 @@ public class MoneyTopAccount implements Comparable<MoneyTopAccount>
 	@Override
 	public int compareTo(MoneyTopAccount account)
 	{
-		if (account.getBalance().doubleValue() > getBalance().doubleValue())
+		if (account.getBalance().doubleValue() > this.getBalance().doubleValue()) {
 			return 1;
+		}
 
-		if (account.getBalance().doubleValue() < getBalance().doubleValue())
+		if (account.getBalance().doubleValue() < this.getBalance().doubleValue()) {
 			return -1;
+		}
 
 		return 0;
 	}

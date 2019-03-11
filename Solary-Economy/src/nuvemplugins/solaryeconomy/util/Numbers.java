@@ -5,8 +5,7 @@ import java.math.BigDecimal;
 public class Numbers
 {
 
-	public Numbers()
-	{
+	public Numbers() {
 	}
 
 	public BigDecimal getDecimal(String numberString)

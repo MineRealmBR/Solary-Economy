@@ -14,23 +14,19 @@ public class Account implements Comparable<Account>
 	private BukkitUser user;
 	private JsonObject data;
 
-	public Account(String name)
-	{
+	public Account(String name) {
 		this(name, new BigDecimal(0.0D));
 	}
 
-	public Account(OfflinePlayer offlinePlayer)
-	{
+	public Account(OfflinePlayer offlinePlayer) {
 		this(offlinePlayer, new BigDecimal(0.0D));
 	}
 
-	public Account(String name, BigDecimal balance)
-	{
+	public Account(String name, BigDecimal balance) {
 		this(Bukkit.getOfflinePlayer(name), balance);
 	}
 
-	public Account(OfflinePlayer offlinePlayer, BigDecimal balance)
-	{
+	public Account(OfflinePlayer offlinePlayer, BigDecimal balance) {
 		this.user = BukkitUser.valueOf(offlinePlayer);
 		if (this.user != null) {
 			this.data = this.user.getUserdata().load().get("economy");
@@ -42,12 +38,15 @@ public class Account implements Comparable<Account>
 			this.data.addProperty("balance", balance.toPlainString());
 			this.data.addProperty("toggle", false);
 		} else {
-			if (this.data.get("name") == null)
+			if (this.data.get("name") == null) {
 				this.data.addProperty("name", offlinePlayer.getName());
-			if (this.data.get("balance") == null)
+			}
+			if (this.data.get("balance") == null) {
 				this.data.addProperty("balance", balance.toPlainString());
-			if (this.data.get("toggle") == null)
+			}
+			if (this.data.get("toggle") == null) {
 				this.data.addProperty("toggle", false);
+			}
 		}
 	}
 
@@ -86,24 +85,27 @@ public class Account implements Comparable<Account>
 
 	public BukkitUser getUser()
 	{
-		return user;
+		return this.user;
 	}
 
 	public void saveAccount()
 	{
 		if (this.user != null) {
 			this.user.getUserdata().load().set("economy", this.data).save();
+
 		}
 	}
 
 	@Override
 	public int compareTo(Account account)
 	{
-		if (account.getBalance().doubleValue() > getBalance().doubleValue())
+		if (account.getBalance().doubleValue() > this.getBalance().doubleValue()) {
 			return 1;
+		}
 
-		if (account.getBalance().doubleValue() < getBalance().doubleValue())
+		if (account.getBalance().doubleValue() < this.getBalance().doubleValue()) {
 			return -1;
+		}
 
 		return 0;
 	}

@@ -10,8 +10,7 @@ public class SubCmdHelp extends SubCommand
 
 	private String command;
 
-	public SubCmdHelp(String command)
-	{
+	public SubCmdHelp(String command) {
 		super("help", "§cUse: /" + command + " ajuda", "", "ajuda", "?");
 		this.command = command;
 	}

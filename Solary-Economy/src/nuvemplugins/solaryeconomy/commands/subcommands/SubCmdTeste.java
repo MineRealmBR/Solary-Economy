@@ -7,8 +7,7 @@ import nuvemplugins.solaryeconomy.abstracts.SubCommand;
 public class SubCmdTeste extends SubCommand
 {
 
-	public SubCmdTeste(String command)
-	{
+	public SubCmdTeste(String command) {
 		super("teste", "§cUse: /" + command + "teste", "solaryeconomy.commands.teste", "testar");
 	}
 

@@ -16,8 +16,7 @@ public abstract class SubCommand
 	private List<String> alias;
 	public Numbers numbers;
 
-	public SubCommand(String name, String usage, String permission, String... alias)
-	{
+	public SubCommand(String name, String usage, String permission, String... alias) {
 		this.name = name;
 		this.usage = usage;
 		this.permission = permission;

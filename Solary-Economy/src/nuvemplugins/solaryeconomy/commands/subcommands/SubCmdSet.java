@@ -11,8 +11,7 @@ import nuvemplugins.solaryeconomy.plugin.Economia;
 public class SubCmdSet extends SubCommand
 {
 
-	public SubCmdSet(String command)
-	{
+	public SubCmdSet(String command) {
 		super("set", "§cUse: /" + command + " set [jogador] [valor]", "solaryeconomy.commands.set", "definir", "setar");
 	}
 

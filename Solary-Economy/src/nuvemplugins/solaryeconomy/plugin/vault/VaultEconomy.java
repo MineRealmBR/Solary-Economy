@@ -15,8 +15,7 @@ import nuvemplugins.solaryeconomy.plugin.Economia;
 public class VaultEconomy implements Economy
 {
 
-	public VaultEconomy()
-	{
+	public VaultEconomy() {
 		Bukkit.getServer().getServicesManager().register(Economy.class, this, SolaryEconomy.instance,
 				ServicePriority.Highest);
 	}

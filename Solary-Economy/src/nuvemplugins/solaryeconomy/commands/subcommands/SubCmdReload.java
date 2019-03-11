@@ -11,8 +11,7 @@ import nuvemplugins.solaryeconomy.util.Config;
 public class SubCmdReload extends SubCommand
 {
 
-	public SubCmdReload(String command)
-	{
+	public SubCmdReload(String command) {
 		super("reload", "§cUse: /" + command + " reload", "solaryeconomy.commands.reload", "recarregar");
 	}
 

@@ -10,8 +10,7 @@ import org.bukkit.plugin.Plugin;
 public class Config
 {
 
-	public Config(Plugin plugin, String name)
-	{
+	public Config(Plugin plugin, String name) {
 		this.plugin = plugin;
 		this.name = name;
 		this.reload();

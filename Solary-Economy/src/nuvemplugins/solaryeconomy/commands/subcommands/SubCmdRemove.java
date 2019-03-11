@@ -11,8 +11,7 @@ import nuvemplugins.solaryeconomy.plugin.Economia;
 public class SubCmdRemove extends SubCommand
 {
 
-	public SubCmdRemove(String command)
-	{
+	public SubCmdRemove(String command) {
 		super("remove", "§cUse: /" + command + " remove [jogador] [valor]", "solaryeconomy.commands.remove", "take");
 	}
 

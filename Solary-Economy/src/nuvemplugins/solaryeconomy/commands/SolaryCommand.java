@@ -22,14 +22,14 @@ import nuvemplugins.solaryeconomy.commands.subcommands.SubCmdTeste;
 import nuvemplugins.solaryeconomy.commands.subcommands.SubCmdToggle;
 import nuvemplugins.solaryeconomy.commands.subcommands.SubCmdTop;
 import nuvemplugins.solaryeconomy.plugin.Economia;
+import nuvemplugins.solaryeconomy.plugin.vault.Vault;
 
 public class SolaryCommand implements CommandExecutor
 {
 
 	private List<SubCommand> subcommands;
 
-	public SolaryCommand(String command)
-	{
+	public SolaryCommand(String command) {
 		this.subcommands = new ArrayList<>();
 		this.subcommands.add(new SubCmdHelp(command));
 		this.subcommands.add(new SubCmdTop(command));
@@ -78,9 +78,12 @@ public class SolaryCommand implements CommandExecutor
 							sender.sendMessage("§a/" + command.getName() + " ajuda §8- §7ver os comandos do plugin.");
 						}
 					} else {
+
+						String accountNameDisplay = Vault.getPrefix(args[0]).concat(args[0]);
+
 						sender.sendMessage(SolaryEconomy.mensagens.get("MONEY_OTHER")
 								.replace("{valor}", SolaryEconomy.numberFormat(Economia.getBalance(args[0])))
-								.replace("{player}", args[0]));
+								.replace("{player}", accountNameDisplay));
 					}
 				} else {
 					sender.sendMessage(SolaryEconomy.mensagens.get("PLAYER_NOTFOUND").replace("{player}", args[0]));

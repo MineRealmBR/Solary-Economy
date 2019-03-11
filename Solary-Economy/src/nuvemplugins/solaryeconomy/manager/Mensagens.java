@@ -10,8 +10,7 @@ public class Mensagens
 	private Config config;
 	private Plugin plugin;
 
-	public Mensagens(Plugin plugin)
-	{
+	public Mensagens(Plugin plugin) {
 		this.plugin = plugin;
 		this.reload();
 	}
