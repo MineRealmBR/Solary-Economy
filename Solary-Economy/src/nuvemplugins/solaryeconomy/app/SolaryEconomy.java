@@ -17,6 +17,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import nuvemplugins.solaryeconomy.manager.Mensagens;
 import nuvemplugins.solaryeconomy.plugin.Economia;
+import nuvemplugins.solaryeconomy.plugin.listener.PlayerInteract;
 import nuvemplugins.solaryeconomy.plugin.objetos.MoneyRunnables;
 import nuvemplugins.solaryeconomy.plugin.vault.VaultEconomy;
 import nuvemplugins.solaryeconomy.util.Config;
@@ -44,7 +45,9 @@ public class SolaryEconomy implements Listener
 		config = new Config(instance, "config.yml");
 		mensagens = new Mensagens(instance);
 
-		instance.getServer().getPluginManager().registerEvents(this, instance);
+		Bukkit.getServer().getPluginManager().registerEvents(this, instance);
+		Bukkit.getServer().getPluginManager().registerEvents(new PlayerInteract(), instance);
+
 		if (config.getYaml().getBoolean("use_vault")) {
 			try {
 				Plugin vault = Bukkit.getPluginManager().getPlugin("Vault");
@@ -103,7 +106,6 @@ public class SolaryEconomy implements Listener
 		} else {
 			formated += " " + config.getString("currency_name.plural");
 		}
-
 		return formated;
 	}
 

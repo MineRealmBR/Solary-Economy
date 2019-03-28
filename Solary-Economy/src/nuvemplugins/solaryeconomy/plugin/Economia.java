@@ -60,17 +60,18 @@ public class Economia
 		return (getAccount(offlinePlayer) != null);
 	}
 
+	@SuppressWarnings("deprecation")
 	public static boolean hasAccount(String name)
 	{
 		return hasAccount(Bukkit.getOfflinePlayer(name));
 	}
 
-	public synchronized static Account getAccount(OfflinePlayer offlinePlayer)
+	public static Account getAccount(OfflinePlayer offlinePlayer)
 	{
 		return ACCOUNTS.get(offlinePlayer.getUniqueId());
 	}
 
-	public synchronized static void delete(Account account)
+	public static void delete(Account account)
 	{
 		if (account != null) {
 			BukkitUser bukkitUser = account.getUser();
@@ -82,7 +83,7 @@ public class Economia
 		}
 	}
 
-	public synchronized static void refreshMoneyTop()
+	public static void refreshMoneyTop()
 	{
 		List<MoneyTopAccount> moneyTop = new ArrayList<>();
 
